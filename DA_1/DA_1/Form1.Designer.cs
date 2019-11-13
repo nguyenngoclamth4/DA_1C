@@ -142,6 +142,7 @@
             this.btntinh.Size = new System.Drawing.Size(116, 30);
             this.btntinh.TabIndex = 11;
             this.btntinh.Text = "Tính đường đi";
+            this.btntinh.Click += new System.EventHandler(this.btntinh_Click);
             // 
             // Form1
             // 

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OxyPlot;
+using OxyPlot.Annotations;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using OxyPlot.WindowsForms;
@@ -19,6 +20,7 @@ namespace DA_1
     public partial class Form1 : Form
     {
         PlotModel pm = new PlotModel();
+        List<Point> point = new List<Point>();
         public Form1()
         {
             InitializeComponent();
@@ -26,21 +28,15 @@ namespace DA_1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //PlotView pv = new PlotView();
-            //plotView1.Dock = DockStyle.Fill;
-            this.Controls.Add(plotView1);
-
+           // this.Controls.Add(plotView1);
             LinearAxis Xaxis = new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 200 };
             LinearAxis Yaxis = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 200};
-            //PlotModel pm = new PlotModel();
-
+ 
             pm.Axes.Add(Xaxis);
             pm.Axes.Add(Yaxis);
 
             plotView1.Model = pm;
-
-
-            this.plotView1.Model = pm; //plot1 is an object of PlotView
+            this.plotView1.Model = pm; 
         }
 
         private void btnthem_Click(object sender, EventArgs e)
@@ -51,11 +47,8 @@ namespace DA_1
             }
             else
             {
-                int cot = 500;
-                int dong = 500;
-                //plotView1.Model.Series.Add(getFuntion());
-                int[,] scores = new int[cot, dong];
-                var series1 = new LineSeries
+               
+                var series1 = new OxyPlot.Series.LineSeries
                 {
                     StrokeThickness = 1,
                     MarkerSize = 1,
@@ -65,26 +58,31 @@ namespace DA_1
                 int n = _r.Next(0, 50);
                 int x_val = n;
                 int y_val = m;
-
-                //int x_val1 = n;
-                //int y_val1 = scores[0, n];
-                //"scores" is an array with my data
-                // PlotModel pm = new PlotModel();
+                point.Add(new Point(txtđiaiem.Text, x_val,y_val));
                 series1.Points.Add(new DataPoint(x_val, y_val));
-                //series1.Points.Add(new DataPoint(x_val1, y_val1));
                 series1.Color = OxyColors.LightBlue;
+                series1.LabelFormatString = txtđiaiem.Text;  
+                series1.Tag = 1;
                 pm.Series.Add(series1);
-                //var s1 = new LineSeries();
-
                 series1.Color = OxyColors.LightBlue;
                 series1.MarkerFill = OxyColors.Blue;
                 series1.MarkerType = OxyPlot.MarkerType.Circle;
                 series1.MarkerSize = 5;
                 txtđiaiem.Clear();
-                //plotView1.Model = pm;
-                //this.plotView1.Model = pm;
-
+                pm.InvalidatePlot(true);
             }
+        }
+        private int tinhkhoangcach()
+        {
+            int kc = 0;
+            for (int i= 0; i < point.Count; i++)
+            {
+                for(int j = i+1; j <point.Count; j++)
+                {
+                    kc = ((point[j].X - point[i].X) * (point[j].X - point[i].X)) + ((point[j].Y - point[i].Y) * (point[j].Y - point[i].Y));
+                }
+            }
+            return kc;
         }
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -96,6 +94,12 @@ namespace DA_1
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private void btntinh_Click(object sender, EventArgs e)
+        {
+            int kq = tinhkhoangcach();
+            MessageBox.Show(kq.ToString());
         }
     }
 }
