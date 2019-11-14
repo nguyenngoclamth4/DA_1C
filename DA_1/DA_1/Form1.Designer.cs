@@ -32,13 +32,13 @@
             this.plotView1 = new OxyPlot.WindowsForms.PlotView();
             this.label1 = new System.Windows.Forms.Label();
             this.txtđiaiem = new System.Windows.Forms.TextBox();
-            this.btnthem = new DevExpress.XtraEditors.SimpleButton();
-            this.btnxoa = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
-            this.btntinh = new DevExpress.XtraEditors.SimpleButton();
+            this.btnthem = new DevExpress.XtraEditors.SimpleButton();
+            this.btnxoa = new DevExpress.XtraEditors.SimpleButton();
+            this.btntinhtoan = new DevExpress.XtraEditors.SimpleButton();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -61,7 +61,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1003, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 27);
+            this.label1.Size = new System.Drawing.Size(120, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Địa điểm đến:";
             // 
@@ -69,30 +69,8 @@
             // 
             this.txtđiaiem.Location = new System.Drawing.Point(1159, 31);
             this.txtđiaiem.Name = "txtđiaiem";
-            this.txtđiaiem.Size = new System.Drawing.Size(237, 35);
+            this.txtđiaiem.Size = new System.Drawing.Size(237, 29);
             this.txtđiaiem.TabIndex = 2;
-            // 
-            // btnthem
-            // 
-            this.btnthem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnthem.ImageOptions.Image")));
-            this.btnthem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnthem.Location = new System.Drawing.Point(1158, 89);
-            this.btnthem.Name = "btnthem";
-            this.btnthem.Size = new System.Drawing.Size(116, 30);
-            this.btnthem.TabIndex = 3;
-            this.btnthem.Text = "Thêm địa điểm";
-            this.btnthem.Click += new System.EventHandler(this.btnthem_Click);
-            // 
-            // btnxoa
-            // 
-            this.btnxoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnxoa.ImageOptions.Image")));
-            this.btnxoa.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnxoa.Location = new System.Drawing.Point(1280, 89);
-            this.btnxoa.Name = "btnxoa";
-            this.btnxoa.Size = new System.Drawing.Size(116, 30);
-            this.btnxoa.TabIndex = 4;
-            this.btnxoa.Text = "Xoá địa điểm";
-            this.btnxoa.Click += new System.EventHandler(this.btnxoa_Click);
             // 
             // groupBox1
             // 
@@ -103,15 +81,6 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ma trận trọng số:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 31);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(349, 219);
-            this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
@@ -131,27 +100,57 @@
             this.rtbLog.TabIndex = 1;
             this.rtbLog.Text = "";
             // 
-            // btntinh
+            // btnthem
             // 
-            this.btntinh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btntinh.ImageOptions.Image")));
-            this.btntinh.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btntinh.Location = new System.Drawing.Point(1143, 407);
-            this.btntinh.Name = "btntinh";
-            this.btntinh.Size = new System.Drawing.Size(133, 30);
-            this.btntinh.TabIndex = 11;
-            this.btntinh.Text = "Tính đường đi";
-            this.btntinh.Click += new System.EventHandler(this.btntinh_Click);
+            this.btnthem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnthem.ImageOptions.Image")));
+            this.btnthem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnthem.Location = new System.Drawing.Point(1159, 66);
+            this.btnthem.Name = "btnthem";
+            this.btnthem.Size = new System.Drawing.Size(93, 43);
+            this.btnthem.TabIndex = 11;
+            this.btnthem.Text = "Thêm";
+            this.btnthem.Click += new System.EventHandler(this.btnthem_Click_1);
+            // 
+            // btnxoa
+            // 
+            this.btnxoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnxoa.ImageOptions.Image")));
+            this.btnxoa.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnxoa.Location = new System.Drawing.Point(1268, 66);
+            this.btnxoa.Name = "btnxoa";
+            this.btnxoa.Size = new System.Drawing.Size(93, 43);
+            this.btnxoa.TabIndex = 11;
+            this.btnxoa.Text = "Xoá";
+            // 
+            // btntinhtoan
+            // 
+            this.btntinhtoan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btntinhtoan.ImageOptions.Image")));
+            this.btntinhtoan.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btntinhtoan.Location = new System.Drawing.Point(1149, 407);
+            this.btntinhtoan.Name = "btntinhtoan";
+            this.btntinhtoan.Size = new System.Drawing.Size(93, 43);
+            this.btntinhtoan.TabIndex = 12;
+            this.btntinhtoan.Text = "Tính toán";
+            this.btntinhtoan.Click += new System.EventHandler(this.btntinhtoan_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(349, 225);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1481, 727);
-            this.Controls.Add(this.btntinh);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1370, 727);
+            this.Controls.Add(this.btntinhtoan);
             this.Controls.Add(this.btnxoa);
             this.Controls.Add(this.btnthem);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtđiaiem);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.plotView1);
@@ -172,12 +171,14 @@
         private OxyPlot.WindowsForms.PlotView plotView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtđiaiem;
-        private DevExpress.XtraEditors.SimpleButton btnthem;
-        private DevExpress.XtraEditors.SimpleButton btnxoa;
+       // private DevExpress.XtraEditors.SimpleButton btnthem;
+        //private DevExpress.XtraEditors.SimpleButton btnxoa;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtbLog;
-        private DevExpress.XtraEditors.SimpleButton btntinh;
+        private DevExpress.XtraEditors.SimpleButton btnthem;
+        private DevExpress.XtraEditors.SimpleButton btnxoa;
+        private DevExpress.XtraEditors.SimpleButton btntinhtoan;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

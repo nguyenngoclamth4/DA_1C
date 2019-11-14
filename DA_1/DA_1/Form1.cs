@@ -52,8 +52,85 @@ namespace DA_1
                 System.Diagnostics.Debug.WriteLine(tempArray[counter]);
             }
         }
+        private int layx(int i)
+        {
+                int x = point[i].X;
+            return x;
+        }
+        private int layy(int i)
+        {
 
-        private void btnthem_Click(object sender, EventArgs e)
+
+            int y = point[i].Y;
+            return y;
+        }
+        private void tinhkhoangcach()
+        {
+            double[,] a = new double[point.Count, point.Count];
+            double kc=0;
+            for (int i = 0; i < point.Count; i++)
+            {
+                int x = layx(i);
+                int y = layy(i);
+                for (int j = 0; j < point.Count; j++)
+                {
+                    kc = Math.Round((Math.Sqrt((((x - point[j].X) * (x - point[j].X)) + ((y - point[j].Y) * (y - point[j].Y))))), 0);
+                    MessageBox.Show(kc.ToString());
+                    a[i, j] = kc;
+
+                }
+            }
+
+            for (int i = 0; i < point.Count; i++)
+            {
+                richTextBox1.Text += "\n";
+                richTextBox1.Text +=point[i].tendiem;
+                for (int j = 0; j < point.Count; j++)
+                {
+                    richTextBox1.Text += point[i].tendiem;
+                    richTextBox1.Text += "     " + a[i, j].ToString();
+
+                }
+            }
+
+        }
+        private void CopyArrayToListView(ListView lvw, double[,] data)
+        {
+            int max_row = data.GetUpperBound(0);
+            int max_col = data.GetUpperBound(1);
+            for (int row = 0; row <= max_row; row++)
+            {
+                ListViewItem new_item = lvw.Items.Add(data[row, 0].ToString());
+                for (int col = 1; col <= max_col; col++)
+                {
+                    new_item.SubItems.Add(data[row, col].ToString());
+                }
+            }
+        }
+        static int n, i, j, k, m, dau, cuoi;
+        int[,] c = new int[50, 50];
+        static int oo = 32000;
+        private void GetRandomData()
+        {
+            Random ran = new Random();
+            n = ran.Next(5, 10);
+            for (i = 1; i <= 5; i++)
+                for (j = i; j <= 5; j++)
+                {
+                    c[i, j] = ran.Next(1000);
+                    if ((i != j) && (c[i, j] == 0)) //khong co duong di thi la vo cung
+
+                    { c[i, j] = oo; }
+                    //chu y:oo ta khai bao va khoi tao la ten bien nen muon viet ra oo thi phai cho vao trong xau
+
+                    if (i == j)  //neu tren duong cheo chinh thi trong so la o
+                    { c[i, j] = 0; }
+                    //gán cho bên đối xứng
+                    c[j, i] = c[i, j];
+                }
+        }
+
+        private void btnthem_Click_1(object sender, EventArgs e)
         {
             if (txtđiaiem.Text == "")
                 MessageBox.Show("Nhập địa điểm đến.");
@@ -90,83 +167,10 @@ namespace DA_1
 
             }
         }
-        private int layx()
+
+        private void btntinhtoan_Click(object sender, EventArgs e)
         {
-          
-            int x = 0;
-          
-            
-                x = point[i].X;
-               
-
-            
-            return x;
-        }
-        private int layy()
-        {
-
-            int y = 0;
-
-            for (int i = 0; i < point.Count; i++)
-            {
-                y = point[i].Y;
-
-
-            }
-            return y;
-        }
-        private double tinhkhoangcach()
-        {
-            double kc=0;
-            for (int i = 0; i < point.Count; i++)
-            {
-                int x = layx();
-                int y = layy();
-
-                //for (int j = i + 1; j < point.Count; j++)
-                //{
-                kc = Math.Round((Math.Sqrt((((x - point[i].X) * (x - point[i].X)) + ((y - point[i].Y) * (y - point[i].Y))))), 0);
-                //}
-            }
-            return kc;
-        }
-        //int n = point.Count;
-        public void taomang2chieu(int x,int y)
-        {
-            
-
-            for (i = 1; i <= point.Count; i++)
-            {
-                for (j = 1; j <= point.Count; j++)
-                    if (c[i, j] >= 32000)
-                        richTextBox1.Text += " " + "oo";
-                    else
-                        richTextBox1.Text += "  " + tinhkhoangcach();
-
-                richTextBox1.Text += "\n";
-            }
-        }
-        static int n, i, j, k, m, dau, cuoi;
-        int[,] c = new int[50, 50];
-        static int oo = 32000;
-        private void GetRandomData()
-        {
-            Random ran = new Random();
-            n = ran.Next(5, 10);
-            for (i = 1; i <= 5; i++)
-                for (j = i; j <= 5; j++)
-                {
-                    c[i, j] = ran.Next(1000);
-                    if ((i != j) && (c[i, j] == 0)) //khong co duong di thi la vo cung
-
-                    { c[i, j] = oo; }
-                    //chu y:oo ta khai bao va khoi tao la ten bien nen muon viet ra oo thi phai cho vao trong xau
-
-                    if (i == j)  //neu tren duong cheo chinh thi trong so la o
-                    { c[i, j] = 0; }
-                    //gán cho bên đối xứng
-                    c[j, i] = c[i, j];
-                }
+                tinhkhoangcach();
         }
 
         private void btnxoa_Click(object sender, EventArgs e)
@@ -179,7 +183,7 @@ namespace DA_1
             int[,] a = new int[20, 20];
             Random rd = new Random();
             int r = rd.Next(-9, 9);
-            richTextBox1.Text = "\n";
+           // richTextBox1.Text = "\n";
            
             for (int i = 1; i <= n; i++)
                 for (int j = 1; j <= n; j++)
@@ -191,7 +195,7 @@ namespace DA_1
             for (int i = 1; i <= n; i++)
                 for (int j = 1; j <= n; j++)
                 {
-                    richTextBox1.Text += "" + a[i, j].ToString();
+                   // richTextBox1.Text += "" + a[i, j].ToString();
                     
                 }
             
@@ -236,16 +240,6 @@ namespace DA_1
             throw new NotImplementedException();
         }
 
-        private void btntinh_Click(object sender, EventArgs e)
-        {
-            double kq = tinhkhoangcach();
-            MessageBox.Show(kq.ToString());
-        }
-
-        private void btnxoa_Click(object sender, EventArgs e)
-        {
-            plotView1.Model.InvalidatePlot(true);
-            plotView1.Model.Series.Clear();
-        }
+        
     }
 }
