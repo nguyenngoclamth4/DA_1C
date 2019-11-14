@@ -35,7 +35,7 @@
             this.btnthem = new DevExpress.XtraEditors.SimpleButton();
             this.btnxoa = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lvDanhSachDiem = new System.Windows.Forms.ListView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.btntinh = new DevExpress.XtraEditors.SimpleButton();
@@ -61,22 +61,22 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1003, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 21);
+            this.label1.Size = new System.Drawing.Size(150, 27);
             this.label1.TabIndex = 1;
             this.label1.Text = "Địa điểm đến:";
             // 
             // txtđiaiem
             // 
-            this.txtđiaiem.Location = new System.Drawing.Point(1121, 30);
+            this.txtđiaiem.Location = new System.Drawing.Point(1159, 31);
             this.txtđiaiem.Name = "txtđiaiem";
-            this.txtđiaiem.Size = new System.Drawing.Size(237, 29);
+            this.txtđiaiem.Size = new System.Drawing.Size(237, 35);
             this.txtđiaiem.TabIndex = 2;
             // 
             // btnthem
             // 
             this.btnthem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnthem.ImageOptions.Image")));
             this.btnthem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnthem.Location = new System.Drawing.Point(1122, 74);
+            this.btnthem.Location = new System.Drawing.Point(1158, 89);
             this.btnthem.Name = "btnthem";
             this.btnthem.Size = new System.Drawing.Size(116, 30);
             this.btnthem.TabIndex = 3;
@@ -87,7 +87,7 @@
             // 
             this.btnxoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnxoa.ImageOptions.Image")));
             this.btnxoa.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnxoa.Location = new System.Drawing.Point(1244, 74);
+            this.btnxoa.Location = new System.Drawing.Point(1280, 89);
             this.btnxoa.Name = "btnxoa";
             this.btnxoa.Size = new System.Drawing.Size(116, 30);
             this.btnxoa.TabIndex = 4;
@@ -96,30 +96,27 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lvDanhSachDiem);
-            this.groupBox1.Location = new System.Drawing.Point(1003, 146);
+            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Location = new System.Drawing.Point(1000, 148);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(355, 253);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ma trận trọng số:";
             // 
-            // lvDanhSachDiem
+            // richTextBox1
             // 
-            this.lvDanhSachDiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvDanhSachDiem.GridLines = true;
-            this.lvDanhSachDiem.HideSelection = false;
-            this.lvDanhSachDiem.Location = new System.Drawing.Point(6, 28);
-            this.lvDanhSachDiem.Name = "lvDanhSachDiem";
-            this.lvDanhSachDiem.Size = new System.Drawing.Size(343, 219);
-            this.lvDanhSachDiem.TabIndex = 7;
-            this.lvDanhSachDiem.UseCompatibleStateImageBehavior = false;
-            this.lvDanhSachDiem.View = System.Windows.Forms.View.Details;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 31);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(349, 219);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rtbLog);
-            this.groupBox2.Location = new System.Drawing.Point(1003, 452);
+            this.groupBox2.Location = new System.Drawing.Point(1000, 454);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(349, 231);
             this.groupBox2.TabIndex = 10;
@@ -138,18 +135,18 @@
             // 
             this.btntinh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btntinh.ImageOptions.Image")));
             this.btntinh.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btntinh.Location = new System.Drawing.Point(1146, 405);
+            this.btntinh.Location = new System.Drawing.Point(1143, 407);
             this.btntinh.Name = "btntinh";
-            this.btntinh.Size = new System.Drawing.Size(116, 30);
+            this.btntinh.Size = new System.Drawing.Size(133, 30);
             this.btntinh.TabIndex = 11;
             this.btntinh.Text = "Tính đường đi";
             this.btntinh.Click += new System.EventHandler(this.btntinh_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 727);
+            this.ClientSize = new System.Drawing.Size(1481, 727);
             this.Controls.Add(this.btntinh);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -178,10 +175,10 @@
         private DevExpress.XtraEditors.SimpleButton btnthem;
         private DevExpress.XtraEditors.SimpleButton btnxoa;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView lvDanhSachDiem;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtbLog;
         private DevExpress.XtraEditors.SimpleButton btntinh;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
