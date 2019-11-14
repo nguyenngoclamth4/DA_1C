@@ -101,5 +101,11 @@ namespace DA_1
             int kq = tinhkhoangcach();
             MessageBox.Show(kq.ToString());
         }
+
+        private void btnxoa_Click(object sender, EventArgs e)
+        {
+            plotView1.Model.InvalidatePlot(true);
+            plotView1.Model.Series.Clear();
+        }
     }
 }

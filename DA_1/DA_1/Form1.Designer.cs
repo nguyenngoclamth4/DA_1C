@@ -92,6 +92,7 @@
             this.btnxoa.Size = new System.Drawing.Size(116, 30);
             this.btnxoa.TabIndex = 4;
             this.btnxoa.Text = "Xoá địa điểm";
+            this.btnxoa.Click += new System.EventHandler(this.btnxoa_Click);
             // 
             // groupBox1
             // 
