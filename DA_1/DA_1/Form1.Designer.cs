@@ -33,19 +33,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtđiaiem = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.btnthem = new DevExpress.XtraEditors.SimpleButton();
             this.btnxoa = new DevExpress.XtraEditors.SimpleButton();
             this.btntinhtoan = new DevExpress.XtraEditors.SimpleButton();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // plotView1
             // 
-            this.plotView1.Location = new System.Drawing.Point(20, 19);
+            this.plotView1.Location = new System.Drawing.Point(17, 14);
             this.plotView1.Margin = new System.Windows.Forms.Padding(5);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
@@ -55,6 +55,9 @@
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            this.plotView1.Click += new System.EventHandler(this.plotView1_Click);
+            this.plotView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseClick);
+            this.plotView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseDown);
             // 
             // label1
             // 
@@ -81,6 +84,16 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ma trận trọng số:";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.AutoWordSelection = true;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(349, 225);
+            this.richTextBox1.TabIndex = 13;
+            this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
@@ -131,15 +144,6 @@
             this.btntinhtoan.TabIndex = 12;
             this.btntinhtoan.Text = "Tính toán";
             this.btntinhtoan.Click += new System.EventHandler(this.btntinhtoan_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 25);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(349, 225);
-            this.richTextBox1.TabIndex = 13;
-            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
