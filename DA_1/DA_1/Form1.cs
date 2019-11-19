@@ -21,6 +21,8 @@ namespace DA_1
     {
         PlotModel pm = new PlotModel();
         List<Point> point = new List<Point>();
+        LinearAxis Xaxis = new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 500 };
+        LinearAxis Yaxis = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 500 };
         public Form1()
         {
             InitializeComponent();
@@ -29,8 +31,8 @@ namespace DA_1
         private void Form1_Load(object sender, EventArgs e)
         {
            // this.Controls.Add(plotView1);
-            LinearAxis Xaxis = new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 200 };
-            LinearAxis Yaxis = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 200};
+
+            
  
             pm.Axes.Add(Xaxis);
             pm.Axes.Add(Yaxis);
@@ -75,7 +77,7 @@ namespace DA_1
                 for (int j = 0; j < point.Count; j++)
                 {
                     kc = Math.Round((Math.Sqrt((((x - point[j].X) * (x - point[j].X)) + ((y - point[j].Y) * (y - point[j].Y))))), 0);
-                    MessageBox.Show(kc.ToString());
+                    //MessageBox.Show(kc.ToString());
                     a[i, j] = kc;
 
                 }
@@ -87,8 +89,8 @@ namespace DA_1
                 richTextBox1.Text +=point[i].tendiem;
                 for (int j = 0; j < point.Count; j++)
                 {
-                    richTextBox1.Text += point[i].tendiem;
-                    richTextBox1.Text += "     " + a[i, j].ToString();
+                    //richTextBox1.Text += point[i].tendiem;
+                    richTextBox1.Text += "       " + a[i, j].ToString();
 
                 }
             }
@@ -143,8 +145,8 @@ namespace DA_1
                     MarkerSize = 1,
                 };
                 Random _r = new Random();
-                int m = _r.Next(0, 50);
-                int n = _r.Next(0, 50);
+                int m = _r.Next(0, 500);
+                int n = _r.Next(0, 500);
                 int x_val = n;
                 int y_val = m;
                 point.Add(new Point(txtđiaiem.Text, x_val, y_val));
@@ -157,22 +159,79 @@ namespace DA_1
                 series1.MarkerFill = OxyColors.Blue;
                 series1.MarkerType = OxyPlot.MarkerType.Circle;
                 series1.MarkerSize = 5;
+                //series1.Transform(x_val,y_val);
 
                 pm.InvalidatePlot(true);
                 //taomatran(5);
                 //richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
 
                 txtđiaiem.Clear();
+
                 // taomang2chieu(x_val,y_val);
 
             }
         }
 
-        private void btntinhtoan_Click(object sender, EventArgs e)
+        private void plotView1_MouseDown(object sender, MouseEventArgs e)
         {
-                tinhkhoangcach();
+            var model = new PlotModel { Title = "Test Mouse Events" };
+            var s1 = new LineSeries();
+            model.Series.Add(s1);
+            double x;
+            s1.MouseDown += (s, ex) =>
+            {
+                txtđiaiem.Text = ((s as LineSeries).InverseTransform(ex.Position).X).ToString();
+            };
         }
 
+        private void plotView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            var model = new PlotModel { Title = "Test Mouse Events" };
+            var s1 = new LineSeries();
+            model.Series.Add(s1);
+            double x;
+            s1.MouseDown += (s, ex) =>
+            {
+                txtđiaiem.Text = ((s as LineSeries).InverseTransform(ex.Position).X).ToString();
+            };
+            
+        }
+
+        private void plotView1_Click(object sender, EventArgs e)
+        {
+            var series1 = new OxyPlot.Series.LineSeries
+            {
+                StrokeThickness = 1,
+                MarkerSize = 1,
+            };
+            Random _r = new Random();
+            int m = _r.Next(0, 500);
+            int n = _r.Next(0, 500);
+            int x_val = n;
+            int y_val = m;
+            point.Add(new Point(txtđiaiem.Text, x_val, y_val));
+            series1.Points.Add(new DataPoint(x_val, y_val));
+            series1.Color = OxyColors.LightBlue;
+            series1.LabelFormatString = txtđiaiem.Text;
+            series1.Tag = 1;
+            pm.Series.Add(series1);
+            series1.Color = OxyColors.LightBlue;
+            series1.MarkerFill = OxyColors.Blue;
+            series1.MarkerType = OxyPlot.MarkerType.Circle;
+            series1.MarkerSize = 5;
+         
+            pm.InvalidatePlot(true);
+            //taomatran(5);
+            //richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
+
+            txtđiaiem.Clear();
+            // taomang2chieu(x_val,y_val);
+        }
+
+        private void btntinhtoan_Click(object sender, EventArgs e)
+        {
+            tinhkhoangcach();
+        }
         private void btnxoa_Click(object sender, EventArgs e)
         {
             
