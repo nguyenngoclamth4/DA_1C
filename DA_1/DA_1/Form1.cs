@@ -23,6 +23,7 @@ namespace DA_1
         List<Point> point = new List<Point>();
         LinearAxis Xaxis = new LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 500 };
         LinearAxis Yaxis = new LinearAxis { Position = AxisPosition.Left, MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Minimum = 0, Maximum = 500 };
+        
         public Form1()
         {
             InitializeComponent();
@@ -30,15 +31,14 @@ namespace DA_1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           // this.Controls.Add(plotView1);
+            // this.Controls.Add(plotView1);
+            point.Add(new Point("Nha", 10, 25));
 
-            
- 
             pm.Axes.Add(Xaxis);
             pm.Axes.Add(Yaxis);
 
             plotView1.Model = pm;
-            this.plotView1.Model = pm; 
+            this.plotView1.Model = pm;
         }
 
         public string[] Lines { get; set; }
@@ -56,7 +56,7 @@ namespace DA_1
         }
         private int layx(int i)
         {
-                int x = point[i].X;
+            int x = point[i].X;
             return x;
         }
         private int layy(int i)
@@ -66,19 +66,20 @@ namespace DA_1
             int y = point[i].Y;
             return y;
         }
+        int[,] a;
         private void tinhkhoangcach()
         {
-            double[,] a = new double[point.Count, point.Count];
-            double kc=0;
+            a = new int[point.Count, point.Count];
+            double kc = 0;
             for (int i = 0; i < point.Count; i++)
             {
                 int x = layx(i);
                 int y = layy(i);
                 for (int j = 0; j < point.Count; j++)
                 {
-                    kc = Math.Round((Math.Sqrt((((x - point[j].X) * (x - point[j].X)) + ((y - point[j].Y) * (y - point[j].Y))))), 0);
-                    //MessageBox.Show(kc.ToString());
-                    a[i, j] = kc;
+                    kc = (Math.Round((Math.Sqrt((((x - point[j].X) * (x - point[j].X)) + ((y - point[j].Y) * (y - point[j].Y))))), 0));
+                   // MessageBox.Show(kc.ToString());
+                    a[i, j] =(int)kc;
 
                 }
             }
@@ -86,16 +87,18 @@ namespace DA_1
             for (int i = 0; i < point.Count; i++)
             {
                 richTextBox1.Text += "\n";
-                richTextBox1.Text +=point[i].tendiem;
+                richTextBox1.Text += point[i].tendiem;
                 for (int j = 0; j < point.Count; j++)
                 {
+
                     //richTextBox1.Text += point[i].tendiem;
-                    richTextBox1.Text += "       " + a[i, j].ToString();
+                    richTextBox1.Text += "       " + ChuyenDoi(a[i, j]);
 
                 }
             }
-
+               
         }
+
         private void CopyArrayToListView(ListView lvw, double[,] data)
         {
             int max_row = data.GetUpperBound(0);
@@ -109,28 +112,7 @@ namespace DA_1
                 }
             }
         }
-        static int n, i, j, k, m, dau, cuoi;
-        int[,] c = new int[50, 50];
-        static int oo = 32000;
-        private void GetRandomData()
-        {
-            Random ran = new Random();
-            n = ran.Next(5, 10);
-            for (i = 1; i <= 5; i++)
-                for (j = i; j <= 5; j++)
-                {
-                    c[i, j] = ran.Next(1000);
-                    if ((i != j) && (c[i, j] == 0)) //khong co duong di thi la vo cung
-
-                    { c[i, j] = oo; }
-                    //chu y:oo ta khai bao va khoi tao la ten bien nen muon viet ra oo thi phai cho vao trong xau
-
-                    if (i == j)  //neu tren duong cheo chinh thi trong so la o
-                    { c[i, j] = 0; }
-                    //gán cho bên đối xứng
-                    c[j, i] = c[i, j];
-                }
-        }
+        
 
         private void btnthem_Click_1(object sender, EventArgs e)
         {
@@ -138,38 +120,93 @@ namespace DA_1
                 MessageBox.Show("Nhập địa điểm đến.");
             else
             {
-
-                var series1 = new OxyPlot.Series.LineSeries
-                {
-                    StrokeThickness = 1,
-                    MarkerSize = 1,
-                };
                 Random _r = new Random();
                 int m = _r.Next(0, 500);
                 int n = _r.Next(0, 500);
                 int x_val = n;
                 int y_val = m;
+                
+               
                 point.Add(new Point(txtđiaiem.Text, x_val, y_val));
-                series1.Points.Add(new DataPoint(x_val, y_val));
-                series1.Color = OxyColors.LightBlue;
-                series1.LabelFormatString = txtđiaiem.Text;
-                series1.Tag = 1;
-                pm.Series.Add(series1);
-                series1.Color = OxyColors.LightBlue;
-                series1.MarkerFill = OxyColors.Blue;
-                series1.MarkerType = OxyPlot.MarkerType.Circle;
-                series1.MarkerSize = 5;
-                //series1.Transform(x_val,y_val);
-
-                pm.InvalidatePlot(true);
-                //taomatran(5);
-                //richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
-
                 txtđiaiem.Clear();
+              
+                for (int j = 0; j < point.Count - 1; j++)
+                {
+                    int x = layx(j);
+                    int y = layy(j);
+                    int x1 = layx(j + 1);
+                    int y1 = layy(j + 1);
+                    DataPoint[] points = new DataPoint[]
+                    {
+                
+                         new DataPoint(layx(0),layy(0)),
+                         new DataPoint(x,y),
+                         new DataPoint(x1,y1),
+                         new DataPoint(x1,y1),
+                         new DataPoint(layx(0),layy(0)),
 
-                // taomang2chieu(x_val,y_val);
+                    };
 
+
+                    
+                    var seriesComplete = new OxyPlot.Series.LineSeries();
+
+                        seriesComplete.Points.AddRange(points);
+                   
+
+
+                    var seriesVisible = new OxyPlot.Series.LineSeries();
+                        seriesVisible.Points.AddRange(points);
+                   
+                    seriesVisible.MarkerFill = OxyColors.Blue;
+                        seriesVisible.MarkerType = MarkerType.Circle;
+                        seriesVisible.MarkerSize = 4;
+                        seriesVisible.StrokeThickness = 0;
+                        this.pm.Series.Add(seriesComplete);
+                        this.pm.Series.Add(seriesVisible);
+                        pm.InvalidatePlot(true);
+
+
+                        txtđiaiem.Clear();
+                    }
+               
             }
+        }
+        int[] visit = new int[100];
+        int[] lotrinh = new int[100];
+        //double n= ;
+        int dem = 0;
+        int gia = 0;
+        // xử lý
+        void tim_canh(int begin)
+        {
+            int i, j, temp = 0;
+            int min;
+            i = begin;
+            visit[i] = 1;
+            lotrinh[0] = i;
+            while (dem != point.Count)
+            {
+                min = 1000;
+                for (j = 0; j <= point.Count-1; j++)
+                {
+                    if (a[i, j] < min && a[i, j] > 0 && visit[i]!= visit[j])
+                    {
+                        min = a[i, j];
+                        temp = j;
+                    }
+                }
+
+                gia = gia + a[i,temp];
+                i = temp;              //chon temp dc chon lam tpho de tiep tuc duyet
+                visit[temp] = 1;       //da duyet thanh pho temp
+                lotrinh[dem + 1] = temp; //ghi thanh pho temp vao lo trinh
+                dem++;
+            }
+
+            gia += a[temp,1];
+            lotrinh[dem] =begin;
+
         }
 
         private void plotView1_MouseDown(object sender, MouseEventArgs e)
@@ -199,90 +236,56 @@ namespace DA_1
 
         private void plotView1_Click(object sender, EventArgs e)
         {
-            var series1 = new OxyPlot.Series.LineSeries
-            {
-                StrokeThickness = 1,
-                MarkerSize = 1,
-            };
-            Random _r = new Random();
-            int m = _r.Next(0, 500);
-            int n = _r.Next(0, 500);
-            int x_val = n;
-            int y_val = m;
-            point.Add(new Point(txtđiaiem.Text, x_val, y_val));
-            series1.Points.Add(new DataPoint(x_val, y_val));
-            series1.Color = OxyColors.LightBlue;
-            series1.LabelFormatString = txtđiaiem.Text;
-            series1.Tag = 1;
-            pm.Series.Add(series1);
-            series1.Color = OxyColors.LightBlue;
-            series1.MarkerFill = OxyColors.Blue;
-            series1.MarkerType = OxyPlot.MarkerType.Circle;
-            series1.MarkerSize = 5;
+            //var series1 = new OxyPlot.Series.LineSeries
+            //{
+            //    StrokeThickness = 1,
+            //    MarkerSize = 1,
+            //};
+            //Random _r = new Random();
+            //int m = _r.Next(0, 500);
+            //int n = _r.Next(0, 500);
+            //int x_val = n;
+            //int y_val = m;
+            //point.Add(new Point(txtđiaiem.Text, x_val, y_val));
+            //series1.Points.Add(new DataPoint(x_val, y_val));
+            //series1.Color = OxyColors.LightBlue;
+            //series1.LabelFormatString = txtđiaiem.Text;
+            //series1.Tag = 1;
+            //pm.Series.Add(series1);
+            //series1.Color = OxyColors.LightBlue;
+            //series1.MarkerFill = OxyColors.Blue;
+            //series1.MarkerType = OxyPlot.MarkerType.Circle;
+            //series1.MarkerSize = 5;
          
-            pm.InvalidatePlot(true);
-            //taomatran(5);
-            //richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
+            //pm.InvalidatePlot(true);
+            ////taomatran(5);
+            ////richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
 
-            txtđiaiem.Clear();
-            // taomang2chieu(x_val,y_val);
+            //txtđiaiem.Clear();
+            //// taomang2chieu(x_val,y_val);
         }
 
         private void btntinhtoan_Click(object sender, EventArgs e)
         {
+        
             tinhkhoangcach();
+            tim_canh(1);
+            for (int i = 0; i < point.Count; i++)
+            {
+                rtbLog.Text +=lotrinh[i]+"->";
+            }
+            MessageBox.Show(gia.ToString());
+            //printf("\n");
+            //printf("\n Tong quang duong: %d", gia);
+            //printf("\n\n An phim bat ki de thoat!");
         }
         private void btnxoa_Click(object sender, EventArgs e)
         {
-            
+
         }
-
-        private void taomatran(int n)
+        string ChuyenDoi(double so)
         {
-            int[,] a = new int[20, 20];
-            Random rd = new Random();
-            int r = rd.Next(-9, 9);
-           // richTextBox1.Text = "\n";
-           
-            for (int i = 1; i <= n; i++)
-                for (int j = 1; j <= n; j++)
-                {
-                    a[i, j] = r;
-                    a[i, i] = 1;
-                }
-
-            for (int i = 1; i <= n; i++)
-                for (int j = 1; j <= n; j++)
-                {
-                   // richTextBox1.Text += "" + a[i, j].ToString();
-                    
-                }
-            
-        }
-
-        //void LoadDuLieuLenListView()
-        //{
-
-        //    //if (this.td != null)
-        //    //{
-        //        lvDanhSachDiem.Clear();
-        //        for (int i = 0; i < 5; i++) this.lvDanhSachDiem.Columns.Add((i + 1).ToString());
-        //        for (int i = 0; i < 5; i++)
-        //        {
-        //            ListViewItem lvit = new ListViewItem(ChuyenDoi(td.duLieu[i, 0]));
-        //            for (int j = 1; j < 5; j++) lvit.SubItems.Add(new ListViewItem.ListViewSubItem().Text = ChuyenDoi(td.duLieu[i, j]));
-        //            lvDanhSachDiem.Items.Add(lvit);
-        //        }
-
-        //        //440
-        //        int witdh = (440 / this.lvDanhSachDiem.Columns.Count) - 1;
-        //        for (int i = 0; i < this.lvDanhSachDiem.Columns.Count; i++) this.lvDanhSachDiem.Columns[i].Width = witdh;
-        //    //}
-        //}
-
-        string ChuyenDoi(int so)
-        {
-            if (so == -1) return "∞";
+            if (so == 0) return "∞";
             return so.ToString();
         }
 
@@ -298,7 +301,5 @@ namespace DA_1
         {
             throw new NotImplementedException();
         }
-
-        
     }
 }
