@@ -32,7 +32,7 @@ namespace DA_1
         private void Form1_Load(object sender, EventArgs e)
         {
             // this.Controls.Add(plotView1);
-            point.Add(new Point("Nha", 10, 25));
+            //point.Add(new Point("Nha", 10, 25));
 
             pm.Axes.Add(Xaxis);
             pm.Axes.Add(Yaxis);
@@ -87,7 +87,7 @@ namespace DA_1
             for (int i = 0; i < point.Count; i++)
             {
                 richTextBox1.Text += "\n";
-                richTextBox1.Text += point[i].tendiem;
+                //richTextBox1.Text += point[i].tendiem;
                 for (int j = 0; j < point.Count; j++)
                 {
 
@@ -116,60 +116,113 @@ namespace DA_1
 
         private void btnthem_Click_1(object sender, EventArgs e)
         {
-            if (txtđiaiem.Text == "")
-                MessageBox.Show("Nhập địa điểm đến.");
+            if (point.Count == 0)
+            {
+                if (txtđiaiem.Text == "")
+                {
+                    MessageBox.Show("Nhập địa điểm đến.");
+                }
+                else
+                {
+                    if (txtx.Text == "")
+                    {
+                        MessageBox.Show("Nhập toạ độ X", "Thông báo");
+                    }
+                    else if (txty.Text == "")
+                    {
+                        MessageBox.Show("Nhập toạ độ Y", "Thông báo");
+                    }
+                    else
+                    {
+
+                        var seriesVisible = new OxyPlot.Series.LineSeries();
+                        point.Add(new Point(txtđiaiem.Text, int.Parse(txtx.Text), int.Parse(txty.Text)));
+                        seriesVisible.Points.Add(new DataPoint(int.Parse(txtx.Text), int.Parse(txty.Text)));
+                        seriesVisible.MarkerFill = OxyColors.Blue;
+                        seriesVisible.MarkerType = MarkerType.Circle;
+                        seriesVisible.MarkerSize = 4;
+                        seriesVisible.StrokeThickness = 0;
+                        ////this.pm.Series.Add(seriesComplete);
+                        this.pm.Series.Add(seriesVisible);
+                        pm.InvalidatePlot(true);
+
+
+                        txtđiaiem.Clear();
+                        txtx.Clear();
+                        txty.Clear();
+                    }
+                }
+            }
             else
             {
-                Random _r = new Random();
-                int m = _r.Next(0, 500);
-                int n = _r.Next(0, 500);
-                int x_val = n;
-                int y_val = m;
-                
-               
-                point.Add(new Point(txtđiaiem.Text, x_val, y_val));
-                txtđiaiem.Clear();
-              
-                for (int j = 0; j < point.Count - 1; j++)
+                if (txtđiaiem.Text == "")
+                    MessageBox.Show("Nhập địa điểm đến.");
+                else
                 {
-                    int x = layx(j);
-                    int y = layy(j);
-                    int x1 = layx(j + 1);
-                    int y1 = layy(j + 1);
-                    DataPoint[] points = new DataPoint[]
+                    if (txtx.Text == "")
                     {
-                
+                        MessageBox.Show("Nhập toạ độ X", "Thông báo");
+                    }
+                    else if (txty.Text == "")
+                    {
+                        MessageBox.Show("Nhập toạ độ Y", "Thông báo");
+                    }
+                    else
+                    {
+                        //Random _r = new Random();
+                        //int m = _r.Next(0, 500);
+                        //int n = _r.Next(0, 500);
+                        int x_val = int.Parse(txtx.Text);
+                        int y_val = int.Parse(txty.Text);
+
+
+                        point.Add(new Point(txtđiaiem.Text, x_val, y_val));
+                        txtđiaiem.Clear();
+
+                        for (int j = 0; j < point.Count - 1; j++)
+                        {
+                            int x = layx(j);
+                            int y = layy(j);
+                            int x1 = layx(j + 1);
+                            int y1 = layy(j + 1);
+                            DataPoint[] points = new DataPoint[]
+                            {
+
                          new DataPoint(layx(0),layy(0)),
                          new DataPoint(x,y),
                          new DataPoint(x1,y1),
                          new DataPoint(x1,y1),
                          new DataPoint(layx(0),layy(0)),
 
-                    };
+                            };
 
 
-                    
-                    var seriesComplete = new OxyPlot.Series.LineSeries();
 
-                        seriesComplete.Points.AddRange(points);
-                   
+                            var seriesComplete = new OxyPlot.Series.LineSeries();
 
-
-                    var seriesVisible = new OxyPlot.Series.LineSeries();
-                        seriesVisible.Points.AddRange(points);
-                   
-                    seriesVisible.MarkerFill = OxyColors.Blue;
-                        seriesVisible.MarkerType = MarkerType.Circle;
-                        seriesVisible.MarkerSize = 4;
-                        seriesVisible.StrokeThickness = 0;
-                        this.pm.Series.Add(seriesComplete);
-                        this.pm.Series.Add(seriesVisible);
-                        pm.InvalidatePlot(true);
+                            seriesComplete.Points.AddRange(points);
 
 
-                        txtđiaiem.Clear();
+
+                            var seriesVisible = new OxyPlot.Series.LineSeries();
+                            seriesVisible.Points.AddRange(points);
+
+                            seriesVisible.MarkerFill = OxyColors.Blue;
+                            seriesVisible.MarkerType = MarkerType.Circle;
+                            seriesVisible.MarkerSize = 4;
+                            seriesVisible.StrokeThickness = 0;
+                            this.pm.Series.Add(seriesComplete);
+                            this.pm.Series.Add(seriesVisible);
+                            pm.InvalidatePlot(true);
+
+
+                            txtđiaiem.Clear();
+                            txtx.Clear();
+                            txty.Clear();
+                        }
+
                     }
-               
+                }
             }
         }
         int[] visit = new int[100];
@@ -269,7 +322,7 @@ namespace DA_1
         {
         
             tinhkhoangcach();
-            tim_canh(1);
+            tim_canh(0);
             for (int i = 0; i < point.Count; i++)
             {
                 rtbLog.Text +=lotrinh[i]+"->";
@@ -300,6 +353,18 @@ namespace DA_1
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private void txtx_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }

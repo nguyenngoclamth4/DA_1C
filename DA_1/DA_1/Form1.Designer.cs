@@ -39,6 +39,10 @@
             this.btnthem = new DevExpress.XtraEditors.SimpleButton();
             this.btnxoa = new DevExpress.XtraEditors.SimpleButton();
             this.btntinhtoan = new DevExpress.XtraEditors.SimpleButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtx = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txty = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +82,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.richTextBox1);
-            this.groupBox1.Location = new System.Drawing.Point(1000, 148);
+            this.groupBox1.Location = new System.Drawing.Point(1000, 186);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(355, 253);
             this.groupBox1.TabIndex = 9;
@@ -98,7 +102,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rtbLog);
-            this.groupBox2.Location = new System.Drawing.Point(1000, 454);
+            this.groupBox2.Location = new System.Drawing.Point(1000, 484);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(349, 231);
             this.groupBox2.TabIndex = 10;
@@ -117,7 +121,7 @@
             // 
             this.btnthem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnthem.ImageOptions.Image")));
             this.btnthem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnthem.Location = new System.Drawing.Point(1159, 66);
+            this.btnthem.Location = new System.Drawing.Point(1156, 137);
             this.btnthem.Name = "btnthem";
             this.btnthem.Size = new System.Drawing.Size(93, 43);
             this.btnthem.TabIndex = 11;
@@ -128,7 +132,7 @@
             // 
             this.btnxoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnxoa.ImageOptions.Image")));
             this.btnxoa.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnxoa.Location = new System.Drawing.Point(1268, 66);
+            this.btnxoa.Location = new System.Drawing.Point(1265, 137);
             this.btnxoa.Name = "btnxoa";
             this.btnxoa.Size = new System.Drawing.Size(93, 43);
             this.btnxoa.TabIndex = 11;
@@ -138,18 +142,56 @@
             // 
             this.btntinhtoan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btntinhtoan.ImageOptions.Image")));
             this.btntinhtoan.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btntinhtoan.Location = new System.Drawing.Point(1149, 407);
+            this.btntinhtoan.Location = new System.Drawing.Point(1156, 445);
             this.btntinhtoan.Name = "btntinhtoan";
             this.btntinhtoan.Size = new System.Drawing.Size(93, 43);
             this.btntinhtoan.TabIndex = 12;
             this.btntinhtoan.Text = "Tính toán";
             this.btntinhtoan.Click += new System.EventHandler(this.btntinhtoan_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1095, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(22, 21);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "X";
+            // 
+            // txtx
+            // 
+            this.txtx.Location = new System.Drawing.Point(1123, 75);
+            this.txtx.Name = "txtx";
+            this.txtx.Size = new System.Drawing.Size(100, 29);
+            this.txtx.TabIndex = 14;
+            this.txtx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtx_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1239, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(20, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Y";
+            // 
+            // txty
+            // 
+            this.txty.Location = new System.Drawing.Point(1265, 78);
+            this.txty.Name = "txty";
+            this.txty.Size = new System.Drawing.Size(100, 29);
+            this.txty.TabIndex = 14;
+            this.txty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txty_KeyPress);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 727);
+            this.Controls.Add(this.txty);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtx);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btntinhtoan);
             this.Controls.Add(this.btnxoa);
             this.Controls.Add(this.btnthem);
@@ -184,6 +226,10 @@
         private DevExpress.XtraEditors.SimpleButton btnxoa;
         private DevExpress.XtraEditors.SimpleButton btntinhtoan;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtx;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txty;
     }
 }
 
