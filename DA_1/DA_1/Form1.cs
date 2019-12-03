@@ -262,33 +262,37 @@ namespace DA_1
 
         }
 
-        private void plotView1_MouseDown(object sender, MouseEventArgs e)
-        {
-            var model = new PlotModel { Title = "Test Mouse Events" };
-            var s1 = new LineSeries();
-            model.Series.Add(s1);
-            double x;
-            s1.MouseDown += (s, ex) =>
-            {
-                txtđiaiem.Text = ((s as LineSeries).InverseTransform(ex.Position).X).ToString();
-            };
-        }
-
-        private void plotView1_MouseClick(object sender, MouseEventArgs e)
-        {
-            var model = new PlotModel { Title = "Test Mouse Events" };
-            var s1 = new LineSeries();
-            model.Series.Add(s1);
-            double x;
-            s1.MouseDown += (s, ex) =>
-            {
-                txtđiaiem.Text = ((s as LineSeries).InverseTransform(ex.Position).X).ToString();
-            };
-            
-        }
+        //private void plotView1_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    this.Cursor = new Cursor(Cursor.Current.Handle);
+        //    int posX = Cursor.Position.X;
+        //    int posY = Cursor.Position.Y;
+        //    double x = 1;
+        //    double y = 1;
+        //    var s1 = new OxyPlot.Series.LineSeries();
+        //    s1.MouseDown += (s, e1) =>
+        //    {
+        //        x = (s as LineSeries).InverseTransform(e1.Position).X;
+        //        y = (s as LineSeries).InverseTransform(e1.Position).Y;
+        //    };
+        //    txtx.Text = x.ToString();
+        //    txty.Text = y.ToString();
+        //}
 
         private void plotView1_Click(object sender, EventArgs e)
         {
+            MouseEvents();
+            //this.Cursor = new Cursor(Cursor.Current.Handle);
+            //int posX = Cursor.Position.X;
+            //int posY = Cursor.Position.Y;
+            //var s1 = new OxyPlot.Series.LineSeries();
+            //s1.MouseDown += (s, e1) =>
+            //{
+            //    posX = (int)(s as LineSeries).InverseTransform(e1.Position).X;
+            //    posY = (int)(s as LineSeries).InverseTransform(e1.Position).Y;
+            //};
+            //txtx.Text = posX.ToString();
+            //txty.Text = posY.ToString();
             //var series1 = new OxyPlot.Series.LineSeries
             //{
             //    StrokeThickness = 1,
@@ -309,7 +313,7 @@ namespace DA_1
             //series1.MarkerFill = OxyColors.Blue;
             //series1.MarkerType = OxyPlot.MarkerType.Circle;
             //series1.MarkerSize = 5;
-         
+
             //pm.InvalidatePlot(true);
             ////taomatran(5);
             ////richTextBox1.SelectedText = Environment.NewLine + x_val + y_val;
@@ -320,12 +324,67 @@ namespace DA_1
 
         private void btntinhtoan_Click(object sender, EventArgs e)
         {
-        
+            //plotView1.cleả
+            plotView1.Model.InvalidatePlot(true);
+            plotView1.Model.Series.Clear();
+            double kc = 0;
+            // chỗ kiểm tra khoảng cách nè
+            // nếu khỏng caics bé thì nối lại
+            // tiếp như z nè
+            for (int i = 0; i < point.Count; i++)
+            {
+                int x = layx(i);
+                int y = layy(i);
+                for (int j = 0; j < point.Count; j++)
+                {
+                    double kcmin = (Math.Round((Math.Sqrt((((layx(0) - point[1].X) * (layx(0) - point[1].X)) + ((layy(0) - point[1].Y) * (layy(0) - point[1].Y))))), 0)); ;
+                    kc = (Math.Round((Math.Sqrt((((x - point[j].X) * (x - point[j].X)) + ((y - point[j].Y) * (y - point[j].Y))))), 0));
+                    // MessageBox.Show(kc.ToString());
+                    if(kc < kcmin && kc>0)//kiểm tra
+                    {
+                        kcmin = kc;
+                        DataPoint[] points = new DataPoint[]// vẽ
+                            {
+
+                         new DataPoint(layx(i),layy(i)),
+                         new DataPoint(layx(j),layx(j)),
+                         //new DataPoint(x1,y1),
+                         //new DataPoint(x1,y1),
+                         new DataPoint(layx(0),layy(0)),
+
+                            };
+                        var seriesComplete = new OxyPlot.Series.LineSeries();
+
+                        seriesComplete.Points.AddRange(points);
+
+
+
+                        var seriesVisible = new OxyPlot.Series.LineSeries();
+                        seriesVisible.Points.AddRange(points);
+
+                        seriesVisible.MarkerFill = OxyColors.Blue;
+                        seriesVisible.MarkerType = MarkerType.Circle;
+                        seriesVisible.MarkerSize = 4;
+                        seriesVisible.StrokeThickness = 0;
+                        this.pm.Series.Add(seriesComplete);
+                        this.pm.Series.Add(seriesVisible);
+                        pm.InvalidatePlot(true);
+                    }
+                }
+            }
             tinhkhoangcach();
             tim_canh(0);
             for (int i = 0; i < point.Count; i++)
             {
-                rtbLog.Text +=lotrinh[i]+"->";
+                if (i == point.Count - 1)
+                {
+                    rtbLog.Text += lotrinh[i] + "-> 0";
+                }
+                else
+                {
+                    rtbLog.Text += lotrinh[i] + "->";
+                }
+                //rtbLog.Text +=lotrinh[i]+"->";
             }
             MessageBox.Show(gia.ToString());
             //printf("\n");
@@ -365,6 +424,77 @@ namespace DA_1
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+        }
+
+        private void plotView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            OxyPlot.ScreenPoint screenPoint;
+            int x, y;
+
+            x = System.Windows.Forms.Cursor.Position.X;
+            y = System.Windows.Forms.Cursor.Position.Y;
+
+
+            screenPoint = new ScreenPoint(x, y);
+            Axis.InverseTransform(screenPoint, Xaxis, Yaxis);
+  
+        }
+        public PlotModel MouseEvents()
+        {
+
+            LineSeries s1 = null;
+            // Subscribe to the mouse down event on the line series
+            pm.MouseDown += (s, e) =>
+            {
+                // only handle the left mouse button (right button can still be used to pan)
+                //if (e.ChangedButton == OxyMouseButton.Left)
+                //{
+                    // Add a line series
+                    s1 = new LineSeries
+                    {
+                        //Title = "LineSeries" + (pm.Series.Count + 1),
+                        MarkerType = MarkerType.None,
+                        StrokeThickness = 2
+
+                    };
+                    s1.Points.Add(Xaxis.InverseTransform(e.Position.X, e.Position.Y, Yaxis));
+                    pm.Series.Add(s1);
+                    pm.InvalidatePlot(true);
+                    e.Handled = true;
+               
+                //s1.Points.Add(new DataPoint(x_val, y_val));
+                s1.Color = OxyColors.LightBlue;
+                s1.LabelFormatString = txtđiaiem.Text;
+                s1.Tag = 1;
+
+                s1.Color = OxyColors.LightBlue;
+                s1.MarkerFill = OxyColors.Blue;
+                s1.MarkerType = OxyPlot.MarkerType.Circle;
+                s1.MarkerSize = 5;
+
+                //pm.InvalidatePlot(true);
+                //}
+            };
+
+            //pm.MouseMove += (s, e) =>
+            //{
+            //    if (s1 != null)
+            //    {
+            //        s1.Points.Add(Xaxis.InverseTransform(e.Position.X, e.Position.Y, Yaxis));
+            //        pm.InvalidatePlot(false);
+            //        e.Handled = true;
+            //    }
+            //};
+
+            //pm.MouseUp += (s, e) =>
+            //{
+            //    if (s1 != null)
+            //    {
+            //        s1 = null;
+            //        e.Handled = true;
+            //    }
+            //};
+            return pm;
         }
     }
 }

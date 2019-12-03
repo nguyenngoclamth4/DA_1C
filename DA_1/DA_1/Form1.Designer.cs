@@ -60,8 +60,9 @@
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             this.plotView1.Click += new System.EventHandler(this.plotView1_Click);
-            this.plotView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseClick);
-            this.plotView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseDown);
+            //this.plotView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseClick);
+            //this.plotView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseDown);
+            this.plotView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseMove);
             // 
             // label1
             // 
