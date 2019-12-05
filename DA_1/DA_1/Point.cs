@@ -10,10 +10,15 @@ namespace DA_1
     {
         public string tendiem { set; get; }
         public int X { set; get; }        // tên
-        public int Y { set; get; }       // giá     // 
-        public Point(string tendiem1, int x, int y)
+        public int Y { set; get; }       // giá
+        public string thoigian { set; get; }
+        public Point(string tendiem1, int x, int y,string thoigian1)
         {
-            tendiem = tendiem1; X = x; Y = y;
+            tendiem = tendiem1; X = x; Y = y; thoigian = thoigian1;
         }
+        //public Point(int x,int y)
+        //{
+        //    X = x;Y = y;
+        //}
     }
 }

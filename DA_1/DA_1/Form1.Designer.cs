@@ -43,6 +43,12 @@
             this.txtx = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txty = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtthoigian = new System.Windows.Forms.TextBox();
+            this.dt_from = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dt_to = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,8 +66,6 @@
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             this.plotView1.Click += new System.EventHandler(this.plotView1_Click);
-            //this.plotView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseClick);
-            //this.plotView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseDown);
             this.plotView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plotView1_MouseMove);
             // 
             // label1
@@ -69,7 +73,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1003, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 21);
+            this.label1.Size = new System.Drawing.Size(150, 27);
             this.label1.TabIndex = 1;
             this.label1.Text = "Địa điểm đến:";
             // 
@@ -77,15 +81,15 @@
             // 
             this.txtđiaiem.Location = new System.Drawing.Point(1159, 31);
             this.txtđiaiem.Name = "txtđiaiem";
-            this.txtđiaiem.Size = new System.Drawing.Size(237, 29);
+            this.txtđiaiem.Size = new System.Drawing.Size(297, 35);
             this.txtđiaiem.TabIndex = 2;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.richTextBox1);
-            this.groupBox1.Location = new System.Drawing.Point(1000, 186);
+            this.groupBox1.Location = new System.Drawing.Point(1008, 335);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(355, 253);
+            this.groupBox1.Size = new System.Drawing.Size(444, 253);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ma trận trọng số:";
@@ -94,18 +98,18 @@
             // 
             this.richTextBox1.AutoWordSelection = true;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 25);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 31);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(349, 225);
+            this.richTextBox1.Size = new System.Drawing.Size(438, 219);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rtbLog);
-            this.groupBox2.Location = new System.Drawing.Point(1000, 484);
+            this.groupBox2.Location = new System.Drawing.Point(1011, 633);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(349, 231);
+            this.groupBox2.Size = new System.Drawing.Size(438, 231);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Log";
@@ -114,7 +118,7 @@
             // 
             this.rtbLog.Location = new System.Drawing.Point(6, 28);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(337, 197);
+            this.rtbLog.Size = new System.Drawing.Size(426, 197);
             this.rtbLog.TabIndex = 1;
             this.rtbLog.Text = "";
             // 
@@ -122,7 +126,7 @@
             // 
             this.btnthem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnthem.ImageOptions.Image")));
             this.btnthem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnthem.Location = new System.Drawing.Point(1156, 137);
+            this.btnthem.Location = new System.Drawing.Point(1122, 267);
             this.btnthem.Name = "btnthem";
             this.btnthem.Size = new System.Drawing.Size(93, 43);
             this.btnthem.TabIndex = 11;
@@ -133,17 +137,18 @@
             // 
             this.btnxoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnxoa.ImageOptions.Image")));
             this.btnxoa.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnxoa.Location = new System.Drawing.Point(1265, 137);
+            this.btnxoa.Location = new System.Drawing.Point(1296, 267);
             this.btnxoa.Name = "btnxoa";
             this.btnxoa.Size = new System.Drawing.Size(93, 43);
             this.btnxoa.TabIndex = 11;
             this.btnxoa.Text = "Xoá";
+            this.btnxoa.Click += new System.EventHandler(this.btnxoa_Click_1);
             // 
             // btntinhtoan
             // 
             this.btntinhtoan.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btntinhtoan.ImageOptions.Image")));
             this.btntinhtoan.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btntinhtoan.Location = new System.Drawing.Point(1156, 445);
+            this.btntinhtoan.Location = new System.Drawing.Point(1180, 594);
             this.btntinhtoan.Name = "btntinhtoan";
             this.btntinhtoan.Size = new System.Drawing.Size(93, 43);
             this.btntinhtoan.TabIndex = 12;
@@ -153,42 +158,107 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1095, 79);
+            this.label2.Location = new System.Drawing.Point(1004, 79);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 21);
+            this.label2.Size = new System.Drawing.Size(27, 27);
             this.label2.TabIndex = 13;
             this.label2.Text = "X";
             // 
             // txtx
             // 
-            this.txtx.Location = new System.Drawing.Point(1123, 75);
+            this.txtx.Location = new System.Drawing.Point(1032, 75);
             this.txtx.Name = "txtx";
-            this.txtx.Size = new System.Drawing.Size(100, 29);
+            this.txtx.Size = new System.Drawing.Size(100, 35);
             this.txtx.TabIndex = 14;
             this.txtx.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtx_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1239, 82);
+            this.label3.Location = new System.Drawing.Point(1148, 82);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(20, 21);
+            this.label3.Size = new System.Drawing.Size(25, 27);
             this.label3.TabIndex = 13;
             this.label3.Text = "Y";
             // 
             // txty
             // 
-            this.txty.Location = new System.Drawing.Point(1265, 78);
+            this.txty.Location = new System.Drawing.Point(1174, 78);
             this.txty.Name = "txty";
-            this.txty.Size = new System.Drawing.Size(100, 29);
+            this.txty.Size = new System.Drawing.Size(100, 35);
             this.txty.TabIndex = 14;
             this.txty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txty_KeyPress);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1291, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 27);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Time";
+            // 
+            // txtthoigian
+            // 
+            this.txtthoigian.Location = new System.Drawing.Point(1356, 75);
+            this.txtthoigian.Name = "txtthoigian";
+            this.txtthoigian.Size = new System.Drawing.Size(100, 35);
+            this.txtthoigian.TabIndex = 14;
+            this.txtthoigian.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txty_KeyPress);
+            // 
+            // dt_from
+            // 
+            this.dt_from.Checked = false;
+            this.dt_from.CustomFormat = "HH:mm";
+            this.dt_from.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dt_from.Location = new System.Drawing.Point(1246, 133);
+            this.dt_from.Name = "dt_from";
+            this.dt_from.ShowCheckBox = true;
+            this.dt_from.Size = new System.Drawing.Size(210, 35);
+            this.dt_from.TabIndex = 16;
+            this.dt_from.Value = new System.DateTime(2019, 12, 5, 15, 43, 33, 0);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1006, 141);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(185, 27);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Thời gian bắt đầu";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1006, 209);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(237, 27);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Thời gian địa điểm đến";
+            // 
+            // dt_to
+            // 
+            this.dt_to.Checked = false;
+            this.dt_to.CustomFormat = "HH:mm";
+            this.dt_to.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dt_to.Location = new System.Drawing.Point(1246, 203);
+            this.dt_to.Name = "dt_to";
+            this.dt_to.ShowCheckBox = true;
+            this.dt_to.Size = new System.Drawing.Size(210, 35);
+            this.dt_to.TabIndex = 19;
+            this.dt_to.Value = new System.DateTime(2019, 12, 5, 16, 43, 0, 0);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 727);
+            this.ClientSize = new System.Drawing.Size(1474, 888);
+            this.Controls.Add(this.dt_to);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dt_from);
+            this.Controls.Add(this.txtthoigian);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txty);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtx);
@@ -231,6 +301,12 @@
         private System.Windows.Forms.TextBox txtx;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txty;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtthoigian;
+        private System.Windows.Forms.DateTimePicker dt_from;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dt_to;
     }
 }
 
